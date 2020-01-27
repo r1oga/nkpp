@@ -1,8 +1,19 @@
-# Building a RESTful API with Koa and Postgres
+# Test driven development of a RESTFul API with authentication
+## Stack
+- koa
+- node.js
+- postgresql
+- Mocha
+- Chai
 
-Project base...
+## Routes
+|URL|HTTP Verb|Action
+|--|--|--|
+|/api/v1/movies|GET|Return all movies
+|/api/v1/movies/:id|GET|Return one movie
+|/api/v1/movies|POST|Add one movie
+|/api/v1/movies/:id|PUT|Update one movie
+|/api/v1/movies/:id|DELETE|Delete one movie
 
-1. Fork/Clone
-1. Install dependencies - `npm install`
-1. Sanity check - `npm start`
-1. Test - `npm test`
+## Resources
+From [this](https://mherman.org/blog/user-authentication-with-passport-and-koa/) course.
