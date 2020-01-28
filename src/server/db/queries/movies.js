@@ -1,10 +1,9 @@
 const knex = require('../connection')
 
-function getAllMovies () {
-  return knex('movies')
-    .select('*')
-}
+const getMovies = () => knex('movies').select('*')
+const getMovie = id => knex('movies').select('*').where({ id: parseInt(id) })
 
 module.exports = {
-  getAllMovies
+  getMovies,
+  getMovie
 }
