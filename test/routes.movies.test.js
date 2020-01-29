@@ -147,5 +147,16 @@ describe('routes: movies', () => {
       const newMovie = res.body.data[0]
       newMovie.rating.should.not.eql(movie.rating)
     })
+
+    it('should throw an error if the movie does not exist', async () => {
+      const res = await chai.request(server)
+        .put('/api/v1/movies/99')
+        .send({ rating: 1 })
+
+      res.status.should.equal(404)
+      res.type.should.equal('application/json')
+      res.body.status.should.eql('error')
+      res.body.message.should.eql('Movie not found')
+    })
   })
 })
