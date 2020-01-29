@@ -1,4 +1,6 @@
 const Koa = require('koa')
+const passport = require('koa-pasport')
+const session = require('koa-session')
 /*
 Koa does not parse body request by default.
 Need a middleware for body parsing (e.g POST request)
@@ -9,7 +11,21 @@ const router = require('./routes/routes')
 const app = new Koa()
 const PORT = process.env.PORT || 1337
 
+// Middlewares
+// sessions
+// change this key for production!
+app.keys = ['super-secret-key']
+app.use(session(app))
+
+// body parser
 app.use(bodyParser())
+
+// authentication
+require('./auth') // to handle serializing and de serializing
+app.use(passport.initialize())
+appl.use(passport.session())
+
+// routes
 app.use(router())
 
 const server = app.listen(PORT, () => {
