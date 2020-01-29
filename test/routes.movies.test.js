@@ -159,4 +159,36 @@ describe('routes: movies', () => {
       res.body.message.should.eql('Movie not found')
     })
   })
+
+  describe('DELETE /api/v1/movies/:id', () => {
+    it('should return the deleted movie', async () => {
+      let movies = await knex('movies').select('*')
+      const movie = movies[0]
+      const lengthBefore = movies.length
+
+      const res = await chai.request(server)
+        .delete(`/api/v1/movies/${movie.id}`)
+
+      res.status.should.eql(200)
+      res.type.should.eql('application/json')
+      res.body.status.should.eql('success')
+      res.body.data[0].should.include.keys(
+        'id', 'name', 'genre', 'rating', 'explicit'
+      )
+
+      // check that movie was deleted
+      movies = await knex('movies').select('*')
+      movies.length.should.eql(lengthBefore - 1)
+    })
+
+    it('should throw an error if movie does not exist', async () => {
+      const res = await chai.request(server)
+        .delete('/api/v1/movies/999')
+
+      res.status.should.eql(404)
+      res.type.should.eql('application/json')
+      res.body.status.should.eql('error')
+      res.body.message.should.eql('Movie not found')
+    })
+  })
 })

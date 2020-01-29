@@ -87,4 +87,30 @@ router.put(`${BASE_URL}/:id`, async ctx => {
   }
 })
 
+router.delete(`${BASE_URL}/:id`, async ctx => {
+  try {
+    const movie = await queries.deleteMovie(ctx.params.id)
+
+    if (movie.length) {
+      ctx.status = 200
+      ctx.body = {
+        status: 'success',
+        data: movie
+      }
+    } else {
+      ctx.status = 404, // not found
+      ctx.body = {
+        status: 'error',
+        message: 'Movie not found'
+      }
+    }
+  } catch (err) {
+    ctx.status = 400
+    ctx.body = {
+      status: 'error',
+      message: err.message || 'an error occured'
+    }
+  }
+})
+
 module.exports = router
