@@ -127,4 +127,25 @@ describe('routes: movies', () => {
         })
     })
   })
+
+  describe('PUT /api/v1/movies', () => {
+    it('should return the movie that was updated', async () => {
+      const movies = await knex('movies').select('*')
+      const movie = movies[0]
+      const res = await chai.request(server)
+        .put(`/api/v1/movies/${movie.id}`)
+        .send({ rating: 0 })
+
+      // should.not.exist(err)
+      res.status.should.equal(200)
+      res.type.should.equal('application/json')
+      res.body.status.should.eql('success')
+      res.body.data[0].should.include.keys(
+        'id', 'name', 'genre', 'rating', 'explicit'
+      )
+      // ensure the movie was in fact updated
+      const newMovie = res.body.data[0]
+      newMovie.rating.should.not.eql(movie.rating)
+    })
+  })
 })
