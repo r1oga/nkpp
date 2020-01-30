@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const passport = require('koa-pasport')
+const passport = require('koa-passport')
 const session = require('koa-session')
 /*
 Koa does not parse body request by default.
@@ -23,7 +23,7 @@ app.use(bodyParser())
 // authentication
 require('./auth') // to handle serializing and de serializing
 app.use(passport.initialize())
-appl.use(passport.session())
+app.use(passport.session())
 
 // routes
 app.use(router())

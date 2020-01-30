@@ -21,10 +21,23 @@ describe('routes : auth', () => {
 
   describe('GET /auth/register', () => {
     it('should render the register view', async () => {
-
+      const res = await chai.request(server).get('/auth/register')
+      res.redirects.length.should.eql(0)
+      res.status.should.eql(200)
+      res.type.should.eql('text/html')
+      // console.log(res.text)
+      const text = res.text.replace(/\s+/g, '')
+      text.should.contain('<h1>Register</h1>')
+      text.should.contain(
+        `<p>
+          <button type='submit'>
+            Register
+          </button>
+        </p>`.replace(/\s+/g, '')
+      )
     })
   })
-
+/*
   describe('POST /auth/register', () => {
     it('should register a new user', async () => {
 
@@ -54,4 +67,5 @@ describe('routes : auth', () => {
 
     })
   })
+  */
 })
