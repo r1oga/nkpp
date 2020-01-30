@@ -6,7 +6,7 @@ const knex = require('./db/connection')
 const options = {}
 
 passport.serializeUser((user, done) => { done(null, user.id) })
-passport.deserializeUser((user, done) => {
+passport.deserializeUser((id, done) => {
   return knex('users')
     .where({ id })
     .first()
