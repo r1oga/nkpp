@@ -24,10 +24,17 @@ router.post('/auth/register', async ctx => {
     }
   })(ctx)
 })
-/*
-router.get('/auth/login', async ctx => {
 
+router.get('/auth/login', async ctx => {
+  if (!ctx.isAuthenticated()) {
+    ctx.type = 'html'
+    ctx.body = fs.createReadStream('./src/server/views/login.html')
+  } else {
+    ctx.redirect('/auth/status')
+  }
+  ctx.status = 200
 })
+/*
 
 router.post('/auth/login', async ctx => {
 })
