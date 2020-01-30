@@ -37,34 +37,42 @@ describe('routes : auth', () => {
       )
     })
   })
-/*
+
   describe('POST /auth/register', () => {
     it('should register a new user', async () => {
+      const res = await chai.request(server)
+        .post('/auth/register')
+        .send({
+          username: 'joe',
+          password: 'ben'
+        })
 
+      res.redirects[0].should.contain('/auth/status')
     })
   })
 
+  /*
   describe('GET /auth/login', () => {
     it('should render the login view', async () => {
-
+      const res = await chai.request('server')
     })
   })
 
   describe('POST /auth/login', () => {
     it('should log the user in', async () => {
-
+      const res = await chai.request('server')
     })
   })
 
   describe('GET /auth/status', () => {
     it('should render the status view', async () => {
-
+      const res = await chai.request('server')
     })
   })
 
   describe('GET /auth/logout', () => {
     it('should logout the user', async () => {
-
+      const res = await chai.request('server')
     })
   })
   */
