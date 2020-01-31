@@ -39,6 +39,7 @@ router.post('/auth/login', async ctx => {
   return passport.authenticate('local', (err, user, info, status) => {
     if (user) {
       ctx.login(user)
+      console.log(err, info, status)
       ctx.redirect('/auth/status')
     } else {
       ctx.status = 400
@@ -55,10 +56,14 @@ router.get('/auth/status', async ctx => {
     ctx.redirect('/auth/login')
   }
 })
-/*
 router.get('/auth/logout', async ctx => {
-
+  if (ctx.isAuthenticated()) {
+    ctx.logout()
+    ctx.redirect('/auth/login')
+  } else {
+    ctx.throw(401)
+    ctx.body = { success: false }
+  }
 })
-*/
 
 module.exports = router
