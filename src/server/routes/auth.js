@@ -34,11 +34,19 @@ router.get('/auth/login', async ctx => {
   }
   ctx.status = 200
 })
-/*
 
 router.post('/auth/login', async ctx => {
+  return passport.authenticate('local', (err, user, info, status) => {
+    if (user) {
+      ctx.login(user)
+      ctx.redirect('/auth/status')
+    } else {
+      ctx.status = 400
+      ctx.body = { status: 'error' }
+    }
+  })(ctx)
 })
-*/
+
 router.get('/auth/status', async ctx => {
   if (ctx.isAuthenticated()) {
     ctx.type = 'html'

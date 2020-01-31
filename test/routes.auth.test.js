@@ -64,22 +64,28 @@ describe('routes : auth', () => {
     })
   })
 
-  /*
   describe('POST /auth/login', () => {
     it('should log the user in', async () => {
-      const res = await chai.request('server')
+      const res = await chai.request(server)
+        .post('/auth/login')
+        .send({
+          username: 'Fred',
+          password: 'Hayek'
+        })
+      res.redirects[0].should.contain('/auth/status')
     })
   })
 
+  /*
   describe('GET /auth/status', () => {
     it('should render the status view', async () => {
-      const res = await chai.request('server')
+      const res = await chai.request(server)
     })
   })
 
   describe('GET /auth/logout', () => {
     it('should logout the user', async () => {
-      const res = await chai.request('server')
+      const res = await chai.request(server)
     })
   })
   */
