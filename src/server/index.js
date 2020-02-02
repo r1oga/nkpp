@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const passport = require('koa-passport')
 const session = require('koa-session')
+const RedisStore = require('koa-redis')
 /*
 Koa does not parse body request by default.
 Need a middleware for body parsing (e.g POST request)
@@ -15,7 +16,7 @@ const PORT = process.env.PORT || 1337
 // sessions
 // change this key for production!
 app.keys = ['super-secret-key']
-app.use(session(app))
+app.use(session({ store: new RedisStore() }, app))
 
 // body parser
 app.use(bodyParser())

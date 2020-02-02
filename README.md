@@ -5,6 +5,14 @@
 - postgresql
 - Mocha
 - Chai
+- Redis
+
+## Getting started
+1. Install dependencies `npm i`
+2. Spin up server on port 1337: `npm start`
+
+## Run Tests
+`npm test`
 
 ## Routes
 ### API
@@ -24,4 +32,4 @@
 |/auth/logout|GET|Logout user|Yes
 
 ## Resources
-From [this](https://mherman.org/blog/user-authentication-with-passport-and-koa/) course.
+From [this](https://mherman.org/blog/user-authentication-with-passport-and-koa/) tutorial from [Michael Herman](https://github.com/mjhea0).
