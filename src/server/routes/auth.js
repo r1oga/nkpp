@@ -13,16 +13,15 @@ router.get('/auth/register', async ctx => {
 })
 
 router.post('/auth/register', async ctx => {
-  const user = await queries.addUser(ctx.request.body)
-  return passport.authenticate('local', (err, user, info, status) => {
-    if (user) {
-      ctx.login(user)
-      ctx.redirect('/auth/status')
-    } else {
-      ctx.status = 400
-      ctx.body = { status: 'error' }
-    }
-  })(ctx)
+  let user = await queries.addUser(ctx.request.body)
+  user = user[0]
+  if (user) {
+    ctx.login(user)
+    ctx.redirect('/auth/status')
+  } else {
+    ctx.status = 400
+    ctx.body = { status: 'error' }
+  }
 })
 
 router.get('/auth/login', async ctx => {
@@ -39,7 +38,6 @@ router.post('/auth/login', async ctx => {
   return passport.authenticate('local', (err, user, info, status) => {
     if (user) {
       ctx.login(user)
-      console.log(err, info, status)
       ctx.redirect('/auth/status')
     } else {
       ctx.status = 400

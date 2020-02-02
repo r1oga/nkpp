@@ -72,6 +72,8 @@ describe('routes : auth', () => {
           username: 'Fred',
           password: 'Hayek'
         })
+
+      // console.log(res)
       res.redirects[0].should.contain('/auth/status')
     })
   })

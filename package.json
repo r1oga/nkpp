@@ -15,6 +15,7 @@
     "mocha": "3.5.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "knex": "^0.20.8",
     "koa": "^2.11.0",

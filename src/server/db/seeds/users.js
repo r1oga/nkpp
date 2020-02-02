@@ -1,11 +1,13 @@
+const bcrypt = require('bcryptjs')
+
 exports.seed = knex => {
-  // Deletes ALL existing entries
   return knex('users').del()
     .then(() => {
-      // Inserts seed entries
+      const salt = bcrypt.genSaltSync()
+      const hash = bcrypt.hashSync('Hayek', salt)
       return knex('users').insert({
         username: 'Fred',
-        password: 'Hayek'
+        password: hash
       })
     })
 }
